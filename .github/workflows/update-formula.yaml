@@ -29,7 +29,7 @@ jobs:
           VERSION="${{ inputs.version }}"
           VERSION="${VERSION#v}"
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          sed -i "s/version \".*\"/version \"${VERSION}\"/" Formula/boe.rb
+          sed -i "s/VERSION = \".*\"/VERSION = \"${VERSION}\"/" Formula/boe.rb
 
           BASE_URL="https://github.com/tetratelabs/built-on-envoy/releases/download/v${VERSION}"
           PLATFORMS=(darwin_amd64 darwin_arm64 linux_amd64 linux_arm64)
