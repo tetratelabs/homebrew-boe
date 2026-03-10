@@ -18,6 +18,11 @@ class Boe < Formula
 
   base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{version}"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   on_macos do
     on_arm do
       url "#{base_url}/boe-darwin-arm64"
@@ -38,11 +43,6 @@ class Boe < Formula
       url "#{base_url}/boe-linux-amd64"
       sha256 SHAS["linux_amd64"]
     end
-  end
-
-  livecheck do
-    url :stable
-    strategy :github_latest
   end
 
   def install
