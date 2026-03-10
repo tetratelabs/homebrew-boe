@@ -25,8 +25,6 @@ jobs:
 
       - name: Compute checksums and update formula
         run: |
-          set -ex
-
           # Strip leading 'v' from the input version if present
           VERSION="${{ inputs.version }}"
           VERSION="${VERSION#v}"
@@ -37,12 +35,9 @@ jobs:
           PLATFORMS=(darwin_amd64 darwin_arm64 linux_amd64 linux_arm64)
 
           for platform in "${PLATFORMS[@]}"; do
-            echo "Downloading boe for ${platform} from ${BASE_URL}/boe-${platform/_/-}"
             curl -sfL -o "/tmp/boe-${platform}" "${BASE_URL}/boe-${platform/_/-}"
-            
             sha=$(sha256sum "/tmp/boe-${platform}" | cut -d ' ' -f 1)
-            echo "SHA256 for ${platform}: ${sha}"
-            sed -i "s/\"${platform}\" => \".*\"/\"${platform}\" => \"${sha}\"/" Formula/boe.rb
+            sed -E -i "s/\"${platform}\"[[:space:]]+=> \".*\"/\"${platform}\" => \"${sha}\"/" Formula/boe.rb
           done
 
           echo "Updated Formula/boe.rb:"
