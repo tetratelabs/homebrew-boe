@@ -25,8 +25,8 @@ jobs:
 
       - name: Compute checksums and update formula
         run: |
-          set -e
-          
+          set -ex
+
           # Strip leading 'v' from the input version if present
           VERSION="${{ inputs.version }}"
           VERSION="${VERSION#v}"
