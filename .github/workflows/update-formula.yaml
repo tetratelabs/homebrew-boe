@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Compute checksums and update formula
         run: |
@@ -37,7 +37,7 @@ jobs:
           for platform in "${PLATFORMS[@]}"; do
             curl -sfL -o "/tmp/boe-${platform}" "${BASE_URL}/boe-${platform/_/-}"
             sha=$(sha256sum "/tmp/boe-${platform}" | cut -d ' ' -f 1)
-            sed -i "s/\"${platform}\" => \"[a-f0-9]\{64\}\"/\"${platform}\" => \"${sha}\"/" Formula/boe.rb
+            sed -i "s/\"${platform}\" => \".*\"/\"${platform}\" => \"${sha}\"/" Formula/boe.rb
           done
 
           echo "Updated Formula/boe.rb:"
