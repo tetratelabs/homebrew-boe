@@ -9,6 +9,10 @@ class Boe < Formula
   version "0.1.0"
   license "Apache-2.0"
 
+  # Build from source
+  head "#{homepage}.git", branch: "main"
+  depends_on "go" => :build
+
   SHAS = {
     "darwin_amd64" => "1082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
     "darwin_arm64" => "b415b8b86f12e166ac8de397eeffbaabf3c587fad2c912360a0322e86116c5d7",
@@ -44,10 +48,6 @@ class Boe < Formula
       sha256 SHAS["linux_amd64"]
     end
   end
-
-  # Build from source
-  head "#{homepage}.git", branch: "main"
-  depends_on "go" => :build
 
   def install
     if build.head? || build.from_source?
