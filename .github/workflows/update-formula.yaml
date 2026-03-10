@@ -1,0 +1,54 @@
+# Copyright Built On Envoy
+# SPDX-License-Identifier: Apache-2.0
+# The full text of the Apache license is available in the LICENSE file at
+# the root of the repo.
+
+name: Update Formula
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Built On Envoy version
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  update-formula:
+    name: Update Formula
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Compute checksums and update formula
+        run: |
+          # Strip leading 'v' from the input version if present
+          VERSION="${{ inputs.version }}"
+          VERSION="${VERSION#v}"
+          sed -i "s/version \".*\"/version \"${VERSION}\"/" Formula/boe.rb
+
+          BASE_URL="https://github.com/tetratelabs/built-on-envoy/releases/download/v${VERSION}"
+          PLATFORMS=(darwin_amd64 darwin_arm64 linux_amd64 linux_arm64)
+
+          for platform in "${PLATFORMS[@]}"; do
+            curl -sfL -o "/tmp/boe-${platform}" "${BASE_URL}/boe-${platform/_/-}"
+            sha=$(sha256sum "/tmp/boe-${platform}" | cut -d ' ' -f 1)
+            sed -i "s/\"${platform}\" => \"[a-f0-9]\{64\}\"/\"${platform}\" => \"${sha}\"/" Formula/boe.rb
+          done
+
+          echo "Updated Formula/boe.rb:"
+          cat Formula/boe.rb
+
+      - name: Commit and push changes
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'github-actions@github.com'
+          git add Formula/boe.rb
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Update boe formula to v${VERSION}"
+          git tag "v${VERSION}"
+          git push
+          git push origin "v${VERSION}"
