@@ -45,8 +45,19 @@ class Boe < Formula
     end
   end
 
+  # Build from source
+  head "#{homepage}.git", branch: "main"
+  depends_on "go" => :build
+
   def install
-    bin.install Dir["boe-*"].first => "boe"
+    if build.head? || build.from_source?
+      system "make", "-C", "cli", "build"
+      os = OS.kernel_name.downcase
+      arch = Hardware::CPU.arm? ? "arm64" : "amd64"
+      bin.install "cli/out/boe-#{os}-#{arch}" => "boe"
+    else
+      bin.install Dir["boe-*"].first => "boe"
+    end
   end
 
   test do
