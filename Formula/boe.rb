@@ -8,7 +8,7 @@ class Boe < Formula
   homepage "https://github.com/tetratelabs/built-on-envoy"
   license "Apache-2.0"
 
-  VERSION = "TODO"
+  VERSION = "0.1.0"
   SHAS = {
     "darwin_amd64" => "A1082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
     "darwin_arm64" => "Bb415b8b86f12e166ac8de397eeffbaabf3c587fad2c912360a0322e86116c5d7",
