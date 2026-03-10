@@ -6,9 +6,10 @@
 class Boe < Formula
   desc "CLI for Built on Envoy"
   homepage "https://github.com/tetratelabs/built-on-envoy"
-  
-  # These constants are automatically updated by the GitHub action
-  VERSION = "0.1.0"
+  license "Apache-2.0"
+
+  # The version and SHA values are automatically updated by the GitHub action
+  version "0.1.0"
   SHAS = {
     "darwin_amd64" => "1082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
     "darwin_arm64" => "b415b8b86f12e166ac8de397eeffbaabf3c587fad2c912360a0322e86116c5d7",
@@ -16,7 +17,7 @@ class Boe < Formula
     "linux_arm64" => "1619e467dbf55cf42d8b2ce0dc7260152bcfe525d897563825d8775776332100",
   }.freeze
 
-  base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{VERSION}"
+  base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{version}"
 
   on_macos do
     on_arm do
@@ -39,9 +40,6 @@ class Boe < Formula
       sha256 SHAS["linux_amd64"]
     end
   end
-
-  version VERSION
-  license "Apache-2.0"
 
   livecheck do
     url :stable

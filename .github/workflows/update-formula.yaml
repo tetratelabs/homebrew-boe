@@ -23,14 +23,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Compute checksums and update formula
+      - name: Set version
         run: |
           # Strip leading 'v' from the input version if present
           VERSION="${{ inputs.version }}"
           VERSION="${VERSION#v}"
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          sed -i "s/VERSION = \".*\"/VERSION = \"${VERSION}\"/" Formula/boe.rb
 
+      - name: Compute checksums and update formula
+        run: |
+          #sed -i "s/VERSION = \".*\"/VERSION = \"${VERSION}\"/" Formula/boe.rb
           BASE_URL="https://github.com/tetratelabs/built-on-envoy/releases/download/v${VERSION}"
           PLATFORMS=(darwin_amd64 darwin_arm64 linux_amd64 linux_arm64)
 
