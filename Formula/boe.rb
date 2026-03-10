@@ -10,10 +10,10 @@ class Boe < Formula
 
   version "0.1.0"
   SHAS = {
-    "darwin_amd64" => "1082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
-    "darwin_arm64" => "b415b8b86f12e166ac8de397eeffbaabf3c587fad2c912360a0322e86116c5d7",
-    "linux_amd64"  => "58e97e9f613ef0001f9f284cc2ac9f48ccafdeeb4a7aeb9d5ef51b4518210ba6",
-    "linux_arm64"  => "1619e467dbf55cf42d8b2ce0dc7260152bcfe525d897563825d8775776332100",
+    "darwin_amd64" => "a082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
+    "darwin_arm64" => "a415b8b86f12e166ac8de397eeffbaabf3c587fad2c912360a0322e86116c5d7",
+    "linux_amd64"  => "a8e97e9f613ef0001f9f284cc2ac9f48ccafdeeb4a7aeb9d5ef51b4518210ba6",
+    "linux_arm64"  => "a619e467dbf55cf42d8b2ce0dc7260152bcfe525d897563825d8775776332100",
   }
 
   base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{version}"
