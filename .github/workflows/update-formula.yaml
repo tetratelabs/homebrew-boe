@@ -28,6 +28,7 @@ jobs:
           # Strip leading 'v' from the input version if present
           VERSION="${{ inputs.version }}"
           VERSION="${VERSION#v}"
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
           sed -i "s/version \".*\"/version \"${VERSION}\"/" Formula/boe.rb
 
           BASE_URL="https://github.com/tetratelabs/built-on-envoy/releases/download/v${VERSION}"
