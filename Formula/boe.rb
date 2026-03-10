@@ -4,10 +4,7 @@
 # the root of the repo.
 
 class Boe < Formula
-  desc "CLI for Built on Envoy"
-  homepage "https://github.com/tetratelabs/built-on-envoy"
-  license "Apache-2.0"
-
+  # These constants are automatically updated by the GitHub action
   VERSION = "0.1.0"
   SHAS = {
     "darwin_amd64" => "1082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
@@ -40,7 +37,10 @@ class Boe < Formula
     end
   end
 
+  desc "CLI for Built on Envoy"
+  homepage "https://github.com/tetratelabs/built-on-envoy"
   version VERSION
+  license "Apache-2.0"
 
   livecheck do
     url :stable
