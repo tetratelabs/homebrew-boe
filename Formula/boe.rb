@@ -51,10 +51,8 @@ class Boe < Formula
 
   def install
     if build.head? || build.from_source?
-      system "make", "-C", "cli", "build"
-      os = OS.kernel_name.downcase
-      arch = Hardware::CPU.arm? ? "arm64" : "amd64"
-      bin.install "cli/out/boe-#{os}-#{arch}" => "boe"
+      system "make", "-C", "cli", "clean", "build"
+      bin.install Dir["cli/out/boe-*"].first => "boe"
     else
       bin.install Dir["boe-*"].first => "boe"
     end
