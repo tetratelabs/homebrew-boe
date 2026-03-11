@@ -5,12 +5,12 @@
 
 class Boe < Formula
   desc "CLI for Built on Envoy"
-  homepage "https://github.com/tetratelabs/built-on-envoy"
+  homepage "https://builtonenvoy.io/"
   version "0.1.0"
   license "Apache-2.0"
-
-  head "#{homepage}.git", branch: "main"
-  base_url = "#{homepage}/releases/download/v#{version}"
+  head "https://github.com/tetratelabs/built-on-envoy.git", branch: "main"
+  
+  base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{version}"
 
   SHAS = {
     "darwin_amd64" => "1082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
