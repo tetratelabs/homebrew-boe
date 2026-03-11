@@ -8,10 +8,8 @@ class Boe < Formula
   homepage "https://github.com/tetratelabs/built-on-envoy"
   version "0.1.0"
   license "Apache-2.0"
-
-  # Build from source
   head "#{homepage}.git", branch: "main"
-  depends_on "go" => :build
+  base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{version}"
 
   SHAS = {
     "darwin_amd64" => "1082017b7a406aaa541108416bbce3333d0716a6265d7303029bc9e3bfda0570",
@@ -19,8 +17,6 @@ class Boe < Formula
     "linux_amd64"  => "58e97e9f613ef0001f9f284cc2ac9f48ccafdeeb4a7aeb9d5ef51b4518210ba6",
     "linux_arm64"  => "1619e467dbf55cf42d8b2ce0dc7260152bcfe525d897563825d8775776332100",
   }.freeze
-
-  base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{version}"
 
   livecheck do
     url :stable
@@ -48,6 +44,8 @@ class Boe < Formula
       sha256 SHAS["linux_amd64"]
     end
   end
+
+  depends_on "go" => :build
 
   def install
     if build.head? || build.from_source?
