@@ -59,7 +59,7 @@ class Boe < Formula
   end
 
   test do
-    output = shell_output("#{bin}/boe --state-home /tmp/boe version")
+    output = shell_output("BOE_STATE_HOME=/tmp/boe #{bin}/boe version")
     if build.head?
       assert_match(/Built On Envoy CLI: #{@built_sha}/, output)
     else
