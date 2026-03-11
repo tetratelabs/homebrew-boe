@@ -49,10 +49,10 @@ class Boe < Formula
   end
 
   def install
-    if build.head? || build.from_source?
+    if build.head?
       system "make", "-C", "cli", "clean", "build"
       bin.install Dir["cli/out/boe-*"].first => "boe"
-      @built_sha = Utils.safe_popen_read("git", "rev-parse", "--short", "HEAD").chomp if build.head?
+      @built_sha = Utils.safe_popen_read("git", "rev-parse", "--short", "HEAD").chomp
     else
       bin.install Dir["boe-*"].first => "boe"
     end
