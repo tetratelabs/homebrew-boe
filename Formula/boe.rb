@@ -59,15 +59,11 @@ class Boe < Formula
   end
 
   test do
+    output = shell_output("BOE_STATE_HOME=/tmp/boe #{bin}/boe version")
     if build.head?
-      # TODO(nacx): move out when the version command is available.
-      output = shell_output("BOE_STATE_HOME=/tmp/boe #{bin}/boe version")
       assert_match(/Built On Envoy CLI: #{@built_sha}/, output)
     else
-      system bin/"boe", "-h"
-      # TODO(nacx): Version 0.1.0 does not yet have the "version" command.
-      # Use this assertion once the next version is released.
-      # assert_match("Built On Envoy CLI: v#{version}", output)
+      assert_match("Built On Envoy CLI: v#{version}", output)
     end
   end
 end
