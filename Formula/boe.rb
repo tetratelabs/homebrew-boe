@@ -52,15 +52,23 @@ class Boe < Formula
     if build.head? || build.from_source?
       system "make", "-C", "cli", "clean", "build"
       bin.install Dir["cli/out/boe-*"].first => "boe"
+      if build.head?
+        @built_sha = Utils.popen_read("git", "rev-parse", "--short", "HEAD").chomp
+      end
     else
       bin.install Dir["boe-*"].first => "boe"
     end
   end
 
   test do
-    system bin/"boe", "-h"
-    # TODO(nacx): Version 0.1.0 does not yet have the "version" command. Once teh next release is published
-    # the test should be updated to check the output of "boe version" to ensure the correct binary is being executed.
-    # assert_match "Built On Envoy CLI: v#{version}", shell_output("#{bin}/boe version")
+    output = shell_output("#{bin}/boe version")
+    if build.head?
+      assert_match(/Built On Envoy CLI: #{@built_sha}/, output)
+    else
+      system bin/"boe", "-h"
+      # TODO(nacx): Version 0.1.0 does not yet have the "version" command. Once teh next release is published
+      # the test should be updated to check the output of "boe version" to ensure the correct binary is being executed.
+      # assert_match("Built On Envoy CLI: v#{version}", output)
+    end
   end
 end
