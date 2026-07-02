@@ -6,17 +6,17 @@
 class Boe < Formula
   desc "CLI for Built on Envoy"
   homepage "https://builtonenvoy.io"
-  version "0.6.1"
+  version "0.6.2"
   license "Apache-2.0"
   head "https://github.com/tetratelabs/built-on-envoy.git", branch: "main"
 
   base_url = "https://github.com/tetratelabs/built-on-envoy/releases/download/v#{version}"
 
   SHAS = {
-    "darwin_amd64" => "d6a73d561e71301d3beb91e319b06397225138686eb5e6975edd206894620ada",
-    "darwin_arm64" => "9076c4ef703f64c4c3af833c652328d7c0fe9670c8901c6c0a14452593522089",
-    "linux_amd64"  => "7d1bf25142ce6fd866d0c9178a8fc35747eeffcc8df36a49f83d6883c197b788",
-    "linux_arm64"  => "8cb0feb152d3e5cf17ec7ceeb15bbd6c9b2fe99a046b47a42f166a93742969ac",
+    "darwin_amd64" => "43b7e2bb962317a67de9e2ac1f9d0d0073bb80c316a5456f611b2ccf352e246b",
+    "darwin_arm64" => "3252fa7b9f513e314b4a3944adbb43fb0daa1e56e275f553314c8815937622a0",
+    "linux_amd64"  => "c424137ea1118fd46534da82f18aa85c9c110e5fe1d6a286b9c6e1d046a66be4",
+    "linux_arm64"  => "d16fce41c11f29a4568797e41352e5231dda8c3da94065ea1ba90efe508b8167",
   }.freeze
 
   livecheck do
